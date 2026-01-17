@@ -3,5 +3,5 @@
 declare module "*.css";
 declare module "*.scss";
 declare module "*.sass";
-declare module "@vapi-ai/web/dist/api";
+declare module "@vapi-ai/web";
 

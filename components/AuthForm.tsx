@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { z } from "zod";
 import Link from "next/link";
 import Image from "next/image";
@@ -29,7 +30,12 @@ const authFormSchema = (type: FormType) => {
 };
 
 const AuthForm = ({ type }: { type: FormType }) => {
+  const [mounted, setMounted] = React.useState(false);
   const router = useRouter();
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,6 +46,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
       password: "",
     },
   });
+
+  if (!mounted) return null;
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
